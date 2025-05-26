@@ -22,6 +22,8 @@
 #include "tim.h"
 #include "gpio.h"
 
+#include "software_timer.h"
+
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
@@ -92,6 +94,8 @@ int main(void)
   MX_SPI1_Init();
   MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
+  setTimer1(1000);
+  timerInit();
 
   /* USER CODE END 2 */
 
@@ -102,6 +106,10 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+	  if(timer1_flag){
+		  HAL_GPIO_TogglePin(DEBUG_LED_GPIO_Port, DEBUG_LED_Pin);
+		  setTimer1(1000);
+	  }
   }
   /* USER CODE END 3 */
 }
