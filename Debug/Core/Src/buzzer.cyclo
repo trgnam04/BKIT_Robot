@@ -1,0 +1,4 @@
+../Core/Src/buzzer.c:48:6:buzzer_init	1
+../Core/Src/buzzer.c:59:6:beep	2
+../Core/Src/buzzer.c:81:6:play_startup_sound	1
+../Core/Src/buzzer.c:92:6:mario_startup_melody	1
