@@ -22,10 +22,10 @@
 #include "tim.h"
 #include "gpio.h"
 
-#include "software_timer.h"
-
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "button_scan.h"
+#include "software_timer.h"
 
 /* USER CODE END Includes */
 
@@ -94,8 +94,11 @@ int main(void)
   MX_SPI1_Init();
   MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
-  setTimer1(1000);
   timerInit();
+  button_init();
+  setTimer1(1000);
+  setTimer2(50);
+
 
   /* USER CODE END 2 */
 
@@ -106,10 +109,17 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	  if(timer1_flag){
-		  HAL_GPIO_TogglePin(DEBUG_LED_GPIO_Port, DEBUG_LED_Pin);
-		  setTimer1(1000);
+	  if(timer2_flag){
+		  button_scan();
+		  setTimer2(50);
 	  }
+	  for(int i = 0; i < 4; i++){
+		  if(button_count[i]){
+			  HAL_GPIO_TogglePin(DEBUG_LED_GPIO_Port, DEBUG_LED_Pin);
+		  }
+	  }
+
+
   }
   /* USER CODE END 3 */
 }
