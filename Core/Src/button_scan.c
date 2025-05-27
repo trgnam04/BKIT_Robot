@@ -7,9 +7,10 @@
 
 #include "button_scan.h"
 
+uint8_t spi_data = 0x00;
 uint8_t button_count[4];
 uint8_t switch_count[4];
-uint8_t spi_data = 0x00;
+
 
 /**
   * @brief  Init matrix button
@@ -36,10 +37,7 @@ void button_scan(){
         uint8_t bit_state = (spi_data & mask) ? 1 : 0;
 
         if(i < 4){
-            if(bit_state)
-                switch_count[3 - i] = 0;
-            else
-                switch_count[3 - i]++;
+        	switch_count[3 - i] = bit_state;
         } else {
             if(bit_state)
                 button_count[7 - i] = 0;
@@ -50,3 +48,12 @@ void button_scan(){
         mask >>= 1;
     }
 }
+
+uint8_t is_button_press(uint8_t idx){
+	return button_count[idx] == 1;
+}
+
+uint8_t get_switch_state(uint8_t idx){
+	return switch_count[idx] == 1;
+}
+

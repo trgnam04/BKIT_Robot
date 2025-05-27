@@ -113,11 +113,12 @@ int main(void)
 		  button_scan();
 		  setTimer2(50);
 	  }
-	  for(int i = 0; i < 4; i++){
-		  if(button_count[i]){
-			  HAL_GPIO_TogglePin(DEBUG_LED_GPIO_Port, DEBUG_LED_Pin);
-		  }
-	  }
+//	  for(int i = 0; i < 4; i++){
+//		  if(is_button_press(i)){
+//			  HAL_GPIO_TogglePin(DEBUG_LED1_GPIO_Port, DEBUG_LED1_Pin);
+//		  }
+//	  }
+	  HAL_GPIO_WritePin(DEBUG_LED1_GPIO_Port, DEBUG_LED1_Pin, get_switch_state(0));
 
 
   }
