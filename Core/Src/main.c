@@ -21,6 +21,7 @@
 #include "spi.h"
 #include "tim.h"
 #include "gpio.h"
+#include "buzzer.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -100,6 +101,10 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
+	  play_startup_sound();
+	  HAL_Delay(5000);
+	  mario_startup_melody();
+	  HAL_Delay(5000);
 
     /* USER CODE BEGIN 3 */
   }
